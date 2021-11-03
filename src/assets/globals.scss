@@ -1,0 +1,22 @@
+input {
+    padding: 1rem;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    border: none;
+    background-color: #F8F5F1;
+
+    ::placeholder {
+        font-size: 2rem;
+    }
+}
+
+button {
+    all: none;
+    padding: 1rem;
+    font-size: 2rem;
+    cursor: pointer;
+
+    &:hover {
+        background: #E4D8C9;
+    }
+}
