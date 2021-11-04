@@ -24,6 +24,17 @@ import { v4 as uuidv4 } from 'uuid';
 import Verse from '@/components/Verse.vue';
 import AddButton from '@/components/AddButton.vue';
 import Modal from '@/components/Modal.vue';
+import * as firebase from 'firebase/app';
+const config = {
+    apiKey: process.env["API_KEY"],
+    authDomain: process.env["AUTH_DOMAIN"],
+    projectId: process.env["PROJECT_ID"],
+    storageBucket: process.env["STORAGE_BUCKET"],
+    messagingSenderId: process.env["MESSAGING_SENDER_ID"],
+    appId: process.env["APP_ID"],
+};
+
+firebase.initializeApp(config);
 
 const auth = getAuth();
 const db = getFirestore();
