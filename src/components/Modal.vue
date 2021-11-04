@@ -55,11 +55,10 @@
 
 
     .modal {
-        width: 25rem;
-        aspect-ratio: 2 / 1;
         background: #FBF6EF;
-        margin: 4rem auto;
+        width: 25rem;
         padding: 0 0 2rem 0;
+        margin: 8rem auto auto auto;
         border-top: 5px solid;
         border-image: linear-gradient(90deg, blue, red) 1;
         border-bottom-left-radius: 5px;
@@ -67,6 +66,15 @@
         box-shadow: 4px 7px 17px -1px #B0B0B0;
         display: flex;
         flex-direction: column;
+
+        h2 {
+            text-align: center;
+        }
+
+        @media(max-width: 500px ) {
+        width: initial;
+        margin: auto;
+    }
 
         .close-btn {
             border: none;

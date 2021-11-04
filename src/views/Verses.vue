@@ -105,6 +105,10 @@ import { auth, db } from '@/firebase';
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+
+    @media(max-width: 500px ) {
+        gap: 0;
+    }
 }
 .fade-enter-active,
 .fade-leave-active {

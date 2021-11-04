@@ -17,8 +17,8 @@
 
 .btn-container {
     position: sticky;
-    bottom: 2rem;
-    left: 3rem;
+    bottom: 0;
+    padding: 2rem;
     display: flex;
     justify-content: flex-start;
 

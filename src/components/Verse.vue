@@ -59,6 +59,8 @@
     @media(max-width: 500px ) {
         width: 100%;
         flex-direction: column;
+        justify-content: space-between;
+        aspect-ratio: initial;
     }
 
 
@@ -75,6 +77,7 @@
         @media(max-width: 500px ) {
         border-right: none;
         margin: 0;
+        padding: 1rem 0 0 0;
     }
 
 
@@ -88,9 +91,12 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
-        width: 100%;
         padding: 0.5rem 2rem 1rem 2rem;
         margin: 1rem 0 1rem 0;
+
+        @media(max-width: 500px ) {
+        margin: 0;
+    }
 
         .metadata__type {
             width: 5rem;
@@ -102,6 +108,10 @@
             justify-content: center;
             align-self: flex-end;
             font-weight: bold;
+            
+            @media(max-width: 500px ) {
+            display: none;
+    }
 
         }
     }

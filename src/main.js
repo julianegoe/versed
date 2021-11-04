@@ -13,5 +13,4 @@ auth.onAuthStateChanged(() => {
             .use(router)
             .mount('#app')
     }
-    
 })
