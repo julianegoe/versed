@@ -1,4 +1,4 @@
-import * as firebase from "firebase/app";
+import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from 'firebase/firestore';
 
@@ -18,8 +18,9 @@ const config = {
     storageBucket: "verseed.appspot.com",
     messagingSenderId: "149138909843",
     appId: "1:149138909843:web:6898c1f8ccc83d8b46bb66"
-  };
-firebase.initializeApp(config)
+    };
+
+const firebaseApp = initializeApp(config)
 
 // utils
 const db = getFirestore();
@@ -29,4 +30,5 @@ const auth = getAuth();
 export {
     db,
     auth,
+    firebaseApp,
 }

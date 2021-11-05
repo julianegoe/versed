@@ -1,7 +1,7 @@
 <template>
     <Header />
     <div class="view-layout">
-        <router-view/>
+        <router-view />
     </div>
 </template>
 <script>
@@ -17,13 +17,12 @@ export default {
 <style lang="scss">
 
 body {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
 }
 
 #app {
+  box-sizing: border-box;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

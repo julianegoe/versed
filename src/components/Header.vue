@@ -1,18 +1,18 @@
 <template>
     <div class="header">
         <div class="header__left">
-        <router-link to="/">
+        <a @click="$router.push({name: 'Home'})">
             <img src="../assets/icons/house-door.svg" alt="Bootstrap" width="32" height="32">
-        </router-link>
-        <router-link v-if="isLoggedIn" to="/verses">
-            <img src="../assets/icons/pencil-square.svg" alt="Bootstrap" width="32" height="32">
-        </router-link>
-        <router-link v-if="!isLoggedIn" to="/login">Login</router-link>
-        <router-link v-if="!isLoggedIn" to="/register">Register</router-link>
-        </div>
-        <a class="header__right" v-if="isLoggedIn" v-on:click.prevent="signOut">
-            <img src="../assets/icons/box-arrow-in-right.svg" alt="Bootstrap" width="32" height="32">
         </a>
+        <a v-if="isLoggedIn" @click="$router.push({name: 'Verses'})">
+            <img src="../assets/icons/pencil-square.svg" alt="Bootstrap" width="32" height="32">
+        </a>
+        </div>
+        <div class="header__right">
+            <a v-if="isLoggedIn" v-on:click.prevent="signOut">
+                <img src="../assets/icons/box-arrow-in-right.svg" alt="Bootstrap" width="32" height="32">
+            </a>
+        </div>
     </div>
 </template>
 
@@ -55,29 +55,33 @@ import { auth } from '@/firebase'
 <style lang="scss" scoped>
 
 .header {
-    position: absolute;
     width: 100%;
-    height: 2rem;
-    padding: 0.5rem;
     background-image: linear-gradient(90deg, blue, red);
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 
-    a {
-        padding-right: 1rem;
-        color: white;
-        font-weight: bold;
-    }
-
-    .header__left, .header__right {
+    .header__left {
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
+        padding: 0.5rem;
+
+        > a {
+        padding-right: 1rem;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+    }
     }
 
     .header__right {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem;
         cursor: pointer;
     }
 }

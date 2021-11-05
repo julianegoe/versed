@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    Home
+    <router-link to="/login">Login</router-link>
+    <router-link to="/register">Register</router-link>
   </div>
 </template>
 
@@ -11,8 +12,4 @@ export default {
 }
 </script>
 <style lang="scss">
-
-.home {
-  margin: 2rem;
-}
 </style>

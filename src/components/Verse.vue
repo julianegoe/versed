@@ -50,6 +50,9 @@
     width: 30rem;
     aspect-ratio: 2 / 1;
     border-top: 5px solid;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
     border-image: linear-gradient(90deg, blue, red) 1;
     background: #FBF6EF;
     box-shadow: 4px 7px 17px -1px #B0B0B0;
@@ -61,6 +64,7 @@
         flex-direction: column;
         justify-content: space-between;
         aspect-ratio: initial;
+        box-shadow: none;
     }
 
 
