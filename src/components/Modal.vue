@@ -60,7 +60,7 @@
         padding: 0 0 2rem 0;
         margin: 8rem auto auto auto;
         border-top: 5px solid;
-        border-image: linear-gradient(90deg, blue, red) 1;
+        border-image: linear-gradient(90deg, #7400b8, #80ffdb) 1;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
         box-shadow: 4px 7px 17px -1px #B0B0B0;
@@ -117,7 +117,7 @@
                 padding: 1rem;
                 margin-top: 1rem;
                 border-radius: 9999px;
-                background: blue;
+                background: #5e60ce;
                 box-shadow: 4px 7px 17px -1px #B0B0B0;
                 cursor: pointer;
                 color: white;

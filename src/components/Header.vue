@@ -58,7 +58,7 @@ import { auth } from '@/firebase'
 
 .header {
     width: 100%;
-    background-image: linear-gradient(90deg, blue, red);
+    background-image: linear-gradient(90deg, #7400b8, #80ffdb);
     display: flex;
     justify-content: space-between;
     align-items: center;

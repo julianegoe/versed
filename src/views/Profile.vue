@@ -1,7 +1,7 @@
 <template>
 <div class="profile-layout">
     <div class="profile-info">
-        <img v-if="photoURL" :src="photoURL" alt="upload">
+        <img lass="profile-image" v-if="photoURL" :src="photoURL" alt="upload">
         <p>Username: {{displayName}}</p>
         <p>E-Mail: {{email}}</p>
     </div>
@@ -104,7 +104,7 @@ export default {
         },
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 
 .profile-layout {
     display: flex;
@@ -112,14 +112,18 @@ export default {
     align-items: center;
     gap: 2rem;
 
-    .profile.-info {
+    .profile-info {
         width: 70%;
-    }
-    img {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        > img {
         aspect-ratio: 1;
-        width: 10rem;
-        object-fit: contain;
-        border-radius: 50%;   
+        border-radius: 50%;
+        height: 10rem;
+        object-fit: cover;  
         }
+    }
 }
 </style>

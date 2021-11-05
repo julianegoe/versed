@@ -26,7 +26,7 @@
         border: none;
         padding: 1rem;
         border-radius: 9999px;
-        background: blue;
+        background: #5e60ce;
         box-shadow: 4px 7px 17px -1px #B0B0B0;
         cursor: pointer;
 
