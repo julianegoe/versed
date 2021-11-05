@@ -1,7 +1,7 @@
 <template>
     <Header />
     <div class="view-layout">
-        <router-view />
+        <router-view/>
     </div>
 </template>
 <script>
@@ -35,6 +35,5 @@ body {
 
 .view-layout {
   padding: auto;
-  padding-top: 8rem;
 }
 </style>

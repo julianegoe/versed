@@ -77,9 +77,6 @@ hr {
     width: 30rem;
     aspect-ratio: 2 / 1;
     border-top: 5px solid;
-    border-bottom: none;
-    border-left: none;
-    border-right: none;
     border-image: linear-gradient(90deg, #7400b8, #80ffdb) 1;
     background: #FBF6EF;
     box-shadow: 4px 7px 17px -1px #B0B0B0;
@@ -89,7 +86,6 @@ hr {
     @media(max-width: 500px ) {
         width: 100%;
         flex-direction: column;
-        justify-content: space-between;
         aspect-ratio: initial;
         box-shadow: none;
     }
@@ -119,12 +115,11 @@ hr {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 0.5rem 2rem 1rem 2rem;
         margin: 1rem 0 1rem 0;
 
         @media(max-width: 500px ) {
         margin: 0;
-        padding: 1rem 0 0 0;
+        padding-bottom: 1rem;
     }
 
 

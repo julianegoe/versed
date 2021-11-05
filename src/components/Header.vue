@@ -62,6 +62,7 @@ import { auth } from '@/firebase'
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 100;
 
     .header__left {
         display: flex;

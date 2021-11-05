@@ -13,9 +13,9 @@
         <input v-model="username" type="text">
         <button type="submit">Edit Username</button>
     </form>
-    <div v-if="verses" >
+    <template v-if="verses" >
         <Verse v-for="verse, index in verses" :key="index" :verse="verse" />
-    </div>
+    </template>
 </div>
 </template>
 
@@ -110,7 +110,12 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 2rem;
+
+    @media(max-width: 500px ) {
+        width: 100vw;
+    }
 
     .profile-info {
         width: 70%;
