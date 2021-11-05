@@ -2,15 +2,18 @@
     <div class="header">
         <div class="header__left">
         <a @click="$router.push({name: 'Home'})">
-            <img src="../assets/icons/house-door.svg" alt="Bootstrap" width="32" height="32">
+            Home
         </a>
         <a v-if="isLoggedIn" @click="$router.push({name: 'Verses'})">
-            <img src="../assets/icons/pencil-square.svg" alt="Bootstrap" width="32" height="32">
+            Verses
         </a>
         </div>
         <div class="header__right">
+            <a v-if="isLoggedIn" @click="$router.push({name: 'Profile'})">
+                Profile
+            </a>
             <a v-if="isLoggedIn" v-on:click.prevent="signOut">
-                <img src="../assets/icons/box-arrow-in-right.svg" alt="Bootstrap" width="32" height="32">
+                Log Out
             </a>
         </div>
     </div>
@@ -34,7 +37,6 @@ import { auth } from '@/firebase'
                 } catch (error) {
                     console.log(error);
                 } 
-
             }
         },
         mounted() {
@@ -82,7 +84,13 @@ import { auth } from '@/firebase'
         justify-content: center;
         align-items: center;
         padding: 0.5rem;
+        
+        > a {
+        color: white;
+        font-weight: bold;
         cursor: pointer;
+        padding-right: 1rem;
+        }
     }
 }
 

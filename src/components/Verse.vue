@@ -76,7 +76,7 @@
         width: 100%;
         padding: 0.5rem 2rem 1rem 2rem;
         margin: 1rem 0 1rem 0;
-        border-right: 1px solid black;
+        border-right: 1px solid lightgray;
 
         @media(max-width: 500px ) {
         border-right: none;

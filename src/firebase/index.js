@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from 'firebase/firestore';
+import { getStorage } from "firebase/storage";
 
 // firebase init - add your own config here
 /* const config = {
@@ -25,10 +26,12 @@ const firebaseApp = initializeApp(config)
 // utils
 const db = getFirestore();
 const auth = getAuth();
+const storage = getStorage();
 
 // export utils/refs
 export {
     db,
     auth,
     firebaseApp,
+    storage,
 }

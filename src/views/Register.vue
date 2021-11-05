@@ -24,19 +24,18 @@ import { auth } from '@/firebase'
                 email: '',
                 password: '',
                 auth: {},
+                user: null,
             }
         },
         methods: {
             async registerUser() {
                 try {
-                    const user = await createUserWithEmailAndPassword(auth, this.email, this.password);
-                    console.log(user);
+                    this.user = await createUserWithEmailAndPassword(auth, this.email, this.password);
+                    console.log(this.user);
                     this.$router.replace({name: 'Login'});
-                    return user
                 } catch (error) {
                     console.log(error);
                 }
-
             }
         },
     }
