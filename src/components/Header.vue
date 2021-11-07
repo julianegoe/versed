@@ -57,12 +57,12 @@ import { auth } from '@/firebase'
 <style lang="scss" scoped>
 
 .header {
+    z-index: 1;
     width: 100%;
     background-image: linear-gradient(90deg, #7400b8, #80ffdb);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 100;
 
     .header__left {
         display: flex;

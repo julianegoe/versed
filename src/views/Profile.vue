@@ -122,12 +122,15 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
+        background: #72efdd;
 
         > img {
         aspect-ratio: 1;
         border-radius: 50%;
+        border: 6px solid #5390d9;
         height: 10rem;
-        object-fit: cover;  
+        object-fit: cover;
+        margin: 1rem;  
         }
     }
 }

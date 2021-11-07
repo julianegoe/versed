@@ -38,6 +38,11 @@ import { auth, db } from '@/firebase';
                 line3: "",
                 line4: "",
                 line5: "",
+                /* errorMsg1: "",
+                errorMsg2: "",
+                errorMsg3: "",
+                errorMsg4: "",
+                errorMsg5: "", */
                 type: "Elfchen",
                 currentUser: null,
                 unsubscribe: null,
@@ -56,7 +61,8 @@ import { auth, db } from '@/firebase';
                 console.log("Current verses in database: ", verses);
                 });
             },
-            async addDocument() {
+            async addDocument(value) {
+                if (value) {
                 this.modalOpen = false;
                 const docData = {
                 id: uuidv4(),
@@ -71,12 +77,23 @@ import { auth, db } from '@/firebase';
             };  console.log(docData);
                 const docRef = await addDoc(collection(db, "Verses"), docData );
                 console.log("Document written with ID: ", docRef.id);
+                this.line1 = '';
+                this.line2 = '';
+                this.line3 = '';
+                this.line4 = '';
+                this.line5 = '';
+                }
             },
             openModal() {
                 this.modalOpen = true;
             },
             closeModal() {
                 this.modalOpen = false;
+                this.line1 = '';
+                this.line2 = '';
+                this.line3 = '';
+                this.line4 = '';
+                this.line5 = '';
             },
         },
         mounted() {
@@ -105,6 +122,7 @@ import { auth, db } from '@/firebase';
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+    margin-top: 1rem;
 
     @media(max-width: 500px ) {
         gap: 0;
