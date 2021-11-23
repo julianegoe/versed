@@ -1,13 +1,7 @@
 <template>
 <transition name="fade">
-    <Modal @close="closeModal" 
-    v-if="modalOpen" 
-    v-model:line1="line1"
-    v-model:line2="line2"
-    v-model:line3="line3"
-    v-model:line4="line4"
-    v-model:line5="line5"
-    @addDoc="addDocument" />
+    <Modal 
+    v-if="$store.state.isModalOpen" />
 </transition>
 <div>
     <div class="verses-layout">
@@ -19,8 +13,7 @@
 
 <script>
 import { onAuthStateChanged } from "firebase/auth";
-import { addDoc, query, orderBy, collection, onSnapshot, Timestamp } from "firebase/firestore";
-import { v4 as uuidv4 } from 'uuid';
+import { query, orderBy, collection, onSnapshot } from "firebase/firestore";
 import Verse from '@/components/Verse.vue';
 import AddButton from '@/components/AddButton.vue';
 import Modal from '@/components/Modal.vue';
@@ -31,22 +24,10 @@ import { auth, db } from '@/firebase';
         components: { Verse, AddButton, Modal },
         data() {
             return {
-                isLoggedIn: false,
                 verses: {},
-                line1: "",
-                line2: "",
-                line3: "",
-                line4: "",
-                line5: "",
-                /* errorMsg1: "",
-                errorMsg2: "",
-                errorMsg3: "",
-                errorMsg4: "",
-                errorMsg5: "", */
                 type: "Elfchen",
                 currentUser: null,
                 unsubscribe: null,
-                modalOpen: false,
             };
         },
         methods: {
@@ -61,49 +42,17 @@ import { auth, db } from '@/firebase';
                 console.log("Current verses in database: ", verses);
                 });
             },
-            async addDocument(value) {
-                if (value) {
-                this.modalOpen = false;
-                const docData = {
-                id: uuidv4(),
-                line1: this.line1.split(' '),
-                line2: this.line2.split(' '),
-                line3: this.line3.split(' '),
-                line4: this.line4.split(' '),
-                line5: this.line5.split(' '),
-                type: this.type,
-                created: Timestamp.fromDate(new Date()),
-                creator: this.currentUser,
-            };  console.log(docData);
-                const docRef = await addDoc(collection(db, "Verses"), docData );
-                console.log("Document written with ID: ", docRef.id);
-                this.line1 = '';
-                this.line2 = '';
-                this.line3 = '';
-                this.line4 = '';
-                this.line5 = '';
-                }
-            },
             openModal() {
-                this.modalOpen = true;
-            },
-            closeModal() {
-                this.modalOpen = false;
-                this.line1 = '';
-                this.line2 = '';
-                this.line3 = '';
-                this.line4 = '';
-                this.line5 = '';
+                this.$store.dispatch('resetElfchen');
+                this.$store.dispatch('setModalOpen');
             },
         },
         mounted() {
             onAuthStateChanged(auth, async (user) => {
                 if (user) {
-                    this.isLoggedIn = true;
                     this.currentUser = user.uid;
                 this.listenToDataChange()
                 } else {
-                    this.isLoggedIn = false;
                     this.unsubscribe();
                     this.$router.replace({name: 'Login'})
                 }

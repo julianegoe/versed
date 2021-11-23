@@ -4,15 +4,15 @@
         <a @click="$router.push({name: 'Home'})">
             Home
         </a>
-        <a v-if="isLoggedIn" @click="$router.push({name: 'Verses'})">
+        <a v-if="$store.state.isLoggedIn" @click="$router.push({name: 'Verses'})">
             Verses
         </a>
         </div>
         <div class="header__right">
-            <a v-if="isLoggedIn" @click="$router.push({name: 'Profile'})">
+            <a v-if="$store.state.isLoggedIn" @click="$router.push({name: 'Profile'})">
                 Profile
             </a>
-            <a v-if="isLoggedIn" v-on:click.prevent="signOut">
+            <a v-if="$store.state.isLoggedIn" v-on:click.prevent="signOut">
                 Log Out
             </a>
         </div>
@@ -25,11 +25,6 @@ import { auth } from '@/firebase'
 
     export default {
         name: 'Header',
-        data() {
-            return {
-                isLoggedIn: false,
-            }
-        },
         methods: {
             async signOut() {
                 try {
@@ -42,11 +37,9 @@ import { auth } from '@/firebase'
         mounted() {
             onAuthStateChanged(auth, (user) => {
                 if (user) {
-                    this.isLoggedIn = true;
-                    const uid = user.uid;
-                    console.log(uid);
+                    this.$store.dispatch('setLoggedIn');
                 } else {
-                    this.isLoggedIn = false;
+                    this.$store.dispatch('setLoggedOut');
                     this.$router.replace({name: 'Login'})
                 }
             });

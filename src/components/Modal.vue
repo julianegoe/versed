@@ -1,20 +1,20 @@
 <template>
 <div class="modal-container">
     <div class="modal">
-        <button class="close-btn" v-on:click="$emit('close')">
+        <button class="close-btn" v-on:click="closeModal">
             <img src="../assets/icons/x.svg" alt="Bootstrap" width="32" height="32">
         </button>
         <h2>Schreibe ein Elfchen</h2>
-        <form class="form-group" v-on:submit.prevent="$emit('addDoc', checkForm())">
-            <input @input="$emit('update:line1', $event.target.value)" :value="line1" type="text" />
+        <form class="form-group" v-on:submit.prevent="addDocument">
+            <input v-model="line1" type="text" />
             <p class="error">{{errorMsg1}}</p>
-            <input @input="$emit('update:line2', $event.target.value)" :value="line2" type="text" />
+            <input v-model="line2" type="text" />
             <p class="error">{{errorMsg2}}</p>
-            <input @input="$emit('update:line3', $event.target.value)" :value="line3" type="text" />
+            <input v-model="line3" type="text" />
             <p class="error">{{errorMsg3}}</p>
-            <input @input="$emit('update:line4', $event.target.value)" :value="line4" type="text" />
+            <input v-model="line4" type="text" />
             <p class="error">{{errorMsg4}}</p>
-            <input @input="$emit('update:line5', $event.target.value)" :value="line5" type="text" />
+            <input v-model="line5" type="text" />
             <p class="error">{{errorMsg5}}</p>
             <button type="submit">Send Elfchen</button>
         </form>
@@ -23,22 +23,18 @@
 </template>
 
 <script>
+import { addDoc, collection, Timestamp } from "firebase/firestore";
+import { v4 as uuidv4 } from 'uuid';
+import { db, auth } from '@/firebase';
+
     export default {
         name: 'Verses',
-        emits: ['close', 
+        emits: [ 
         'update:line1', 
         'update:line2',
         'update:line3',
         'update:line4',
-        'update:line5',
-        'addDoc',],
-        props: {
-            line1: String,
-            line2: String,
-            line3: String,
-            line4: String,
-            line5: String,
-        },
+        'update:line5',],
         data() {
             return {
                 type: "Elfchen",
@@ -49,6 +45,48 @@
                 errorMsg5: '',
             };
         },
+        computed: {
+            line1: {
+                get() {
+                    return this.$store.state.elfchen.line1;
+                },
+                set(value) {
+                    this.$store.dispatch('setElfchen', {line1: value})
+                }
+            },
+            line2: {
+                get() {
+                    return this.$store.state.elfchen.line2;
+                },
+                set(value) {
+                    this.$store.dispatch('setElfchen', {line2: value})
+                }
+            },
+            line3: {
+                get() {
+                    return this.$store.state.elfchen.line3;
+                },
+                set(value) {
+                    this.$store.dispatch('setElfchen', {line3: value})
+                }
+            },
+            line4: {
+                get() {
+                    return this.$store.state.elfchen.line4;
+                },
+                set(value) {
+                    this.$store.dispatch('setElfchen', {line4: value})
+                }
+            },
+            line5: {
+                get() {
+                    return this.$store.state.elfchen.line5;
+                },
+                set(value) {
+                    this.$store.dispatch('setElfchen', {line5: value})
+                }
+            }
+        },
         methods: {
             checkForm() {
                 let isValid = true;
@@ -57,23 +95,23 @@
                 let errorMsg3 = '';
                 let errorMsg4 = '';
                 let errorMsg5 = '';
-                if (this.line1.split(' ').length != 1 || this.line1 === '') {
+                if (this.$store.state.elfchen.line1.trim().split(' ').length != 1 || this.line1 === '') {
                     errorMsg1 = 'Write exactly one word';
                     isValid = false
                 }
-                if (this.line2.split(' ').length != 2) {
+                if (this.$store.state.elfchen.line2.trim().split(' ').length != 2) {
                     errorMsg2 = 'Write exactly two words';
                     isValid = false
                 }
-                if (this.line3.split(' ').length != 3) {
+                if (this.$store.state.elfchen.line3.trim().split(' ').length != 3) {
                     errorMsg3 = 'Write exactly three words';
                     isValid = false
                 }
-                if (this.line4.split(' ').length != 4) {
+                if (this.$store.state.elfchen.line4.trim().split(' ').length != 4) {
                     errorMsg4 = 'Write exactly four words';
                     isValid = false
                 }
-                if (this.line5.split(' ').length > 1 || this.line5 === '') {
+                if (this.$store.state.elfchen.line5.trim().split(' ').length > 1 || this.line5 === '') {
                     errorMsg5 = 'Write exactly one word';
                     isValid = false
                 } 
@@ -83,6 +121,28 @@
                 this.errorMsg4 = errorMsg4;
                 this.errorMsg5 = errorMsg5;
                 return isValid
+            },
+            async addDocument() {
+                if(this.checkForm()) {
+                const docData = {
+                id: uuidv4(),
+                line1: this.$store.state.elfchen.line1.split(' '),
+                line2: this.$store.state.elfchen.line2.split(' '),
+                line3: this.$store.state.elfchen.line3.split(' '),
+                line4: this.$store.state.elfchen.line4.split(' '),
+                line5: this.$store.state.elfchen.line5.split(' '),
+                type: this.type,
+                created: Timestamp.fromDate(new Date()),
+                creator: auth.currentUser.uid,
+            };  console.log(docData);
+                const docRef = await addDoc(collection(db, "Verses"), docData );
+                console.log("Document written with ID: ", docRef.id);
+                this.$store.dispatch('resetElfchen');
+                this.$store.dispatch('setModalClosed');
+                }
+            },
+            closeModal() {
+                this.$store.dispatch('setModalClosed');
             },
         }
     }

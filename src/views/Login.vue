@@ -32,7 +32,8 @@ import { auth } from '@/firebase'
                 console.log(this.password);
                 try {
                     await signInWithEmailAndPassword(auth, this.email, this.password);
-                    this.$router.replace({name: 'Verses'})
+                    this.$store.dispatch('setLoggedIn');
+                    this.$router.replace({name: 'Verses'});
                 } catch (error) {
                     console.log(error);
                 }

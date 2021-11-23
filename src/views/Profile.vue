@@ -31,7 +31,6 @@ export default {
     components: { Verse },
     data() {
         return {
-            isLoggedIn: true,
             downloadImagePath: null,
             uploadImageData: null,
             username: '',
@@ -90,13 +89,11 @@ export default {
     mounted() {
             onAuthStateChanged(auth, async (user) => {
                 if (user) {
-                    this.isLoggedIn = true;
                     this.displayName = user.displayName;
                     this.photoURL = user.photoURL;
                     this.email = user.email;
                     this.getVersesByUserId();
                 } else {
-                    this.isLoggedIn = false;
                     this.unsubscribe();
                     this.$router.replace({name: 'Login'})
                 }

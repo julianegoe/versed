@@ -3,7 +3,7 @@
     <div class="title">
       Your're the Versed!
     </div>
-    <div class="btn-section">
+    <div v-if="!$store.state.isLoggedIn" class="btn-section">
       <button v-on:click="goToLogin">Login</button>
       <button v-on:click="goToRegister">Register</button>
     </div>
@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from '@/firebase';
 
 export default {
   name: 'Home',
@@ -21,6 +23,15 @@ export default {
     goToRegister() {
       this.$router.push({name: 'Register'});
     }
+  },
+  mounted() {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.$store.dispatch('setLoggedIn');
+      } else {
+        this.$store.dispatch('setLoggedOut');
+      }
+    });
   }
 }
 </script>
